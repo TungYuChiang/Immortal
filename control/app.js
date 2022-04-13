@@ -14,6 +14,6 @@ app.get("/login",(req,res)=>{
     res.render("Login.ejs");
 })
 
-app.listen(3000,()=>{
-    console.log("Sever is running on port 3000")
-})
+app.listen(process.env.PORT || 3000, 
+	() => console.log("Server is running..."));
+
