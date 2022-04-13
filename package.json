@@ -1,0 +1,19 @@
+{
+  "name": "immortal",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://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@github.com/TungYuChiang/immortal.git"
+  },
+  "author": "Jackson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TungYuChiang/immortal/issues"
+  },
+  "homepage": "https://github.com/TungYuChiang/immortal#readme"
+}
