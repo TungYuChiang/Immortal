@@ -4,7 +4,7 @@ const app=express();
 
 //homepage
 app.get("/",(req,res)=>{
-    res.send("You are on the homepage.")
+    res.render("index.ejs");
 })
 
 
