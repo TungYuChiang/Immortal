@@ -7,7 +7,7 @@ app.use(express.static('public'));
 
 //homepage
 app.get("/",(req,res)=>{
-    res.render("index.ejs");
+    res.sendFile("index.html");
 })
 
 
