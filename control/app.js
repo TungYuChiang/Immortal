@@ -51,8 +51,6 @@ app.get("/register", (req, res) => {
 
 app.post("/regSuccess", (req, res) => {
     let { account, password, name, birth, zodiac, age, sex, address, offend } = req.body;
-    //console.log(req.body);
-    res.send("註冊成功!!")
     //將抓過來的檔案及合成一個data
     const data = new believer(req.body);
     //save data to DB
@@ -64,6 +62,7 @@ app.post("/regSuccess", (req, res) => {
             console.log("error");
             console.log(e);
         });
+    res.render("regsuccess.ejs");
 })
 
 //login
