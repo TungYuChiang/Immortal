@@ -35,7 +35,6 @@ const Schema = new mongoose.Schema({
 //create a model for 信眾(believers)
 const believer = mongoose.model("believer", Schema);
 
-
 app.set("view engine", "ejs");
 
 app.use(express.static('public'));
