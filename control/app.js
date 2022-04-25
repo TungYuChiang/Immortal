@@ -41,7 +41,7 @@ app.use(express.static('public'));
 
 //homepage
 app.get("/",(req,res)=>{
-    res.render("index")
+    res.render("index",{user:null});
 })
 
 //register
@@ -68,6 +68,17 @@ app.post("/regSuccess", (req, res) => {
 //login
 app.get("/login",(req,res)=>{
     res.render("Login");
+})
+
+app.post("/login",async(req,res)=>{
+    let {email,password} = req.body;//把user送過來的資料抓下來
+    user = await believer.findOne({account:email,password:password}) //去Database找有沒有這個人
+    console.log(user);
+    if(user){
+        res.render("index",{user:user});//導回首頁
+    }else{
+        res.status(404).send("登入失敗")
+    }
 })
 
 app.listen(process.env.PORT || 3000,
