@@ -8,7 +8,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 //connect to mongoDB
 mongoose
-    .connect("mongodb+srv://jackson:IM880319@immortal-free.rxzaq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", {
+    .connect(process.env.MONGODB||"mongodb+srv://jackson:IM880319@immortal-free.rxzaq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", {
         useNewUrlParser: true,
         useUnifiedTopology: true,
     })
