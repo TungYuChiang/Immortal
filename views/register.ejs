@@ -28,7 +28,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">  
+                <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/">首頁</a>
                     </li>
@@ -74,32 +74,19 @@
                 </div>
                 <div class="mb-3">
                     時辰/Birth
-                    <p><input type="date" class="form-control" id="date" name="date"></p>
+                    <p><input type="date" class="form-control" id="date" name="birth" onblur="getAge()"
+                            onkeyup="validateNull5(this)" /><span id="null5"></span></p>
 
                 </div>
-                <div class="mb-3">
+                <div class=" mb-3">
                     生肖/Zodiac
-                    <p><select class="form-control" id="zodiac" name="zodiac">
-                            <option value="">請選擇十二生肖</option>
-                            <option value="rat">鼠</option>
-                            <option value="ox">牛</option>
-                            <option value="tiger">虎</option>
-                            <option value="rabbit">兔</option>
-                            <option value="dragon">龍</option>
-                            <option value="snake">蛇</option>
-                            <option value="horse">馬</option>
-                            <option value="goat">羊</option>
-                            <option value="monkey">猴</option>
-                            <option value="rooster">雞</option>
-                            <option value="dog">狗</option>
-                            <option value="pig">豬</option>
-                        </select></p>
+                    <p><input type="text" class="form-control" id="zodiac" name="zodiac" readonly="readonly" />
 
                 </div>
                 <div class="mb-3">
                     年齡/Age
-                    <p><input type="text" class="form-control" name="age" onkeyup="validateNum(this)"><span
-                            id="num"></span></p>
+                    <p><input type="text" class="form-control" id="age" name="age" readonly="readonly" />
+                    </p>
                 </div>
                 <div class="mb-3">
                     性別/Sex
@@ -109,7 +96,6 @@
                             <option value="woman">女</option>
                             <option value="other">其他</option>
                         </select></p>
-
                 </div>
                 <div class="mb-3">
                     住址/Address
@@ -117,7 +103,10 @@
                             onkeyup="validateNull4(this)"><span id="null4"></span></p>
                 </div>
                 <div class="mb-3">
-                    <p><input type="submit" value="註冊" id="submit" />
+                    <input type="hidden" class="form-control" id="sudo" name="sudo">
+                </div>
+                <div class="mb-3">
+                    <p><input type="submit" value="註冊" id="submit" onclick="validateSubmit()" />
                         <input type="reset" value="重置" />
                     </p>
                 </div>
@@ -137,20 +126,59 @@
                 document.getElementById("submit").disabled = true;
             }
         }
-        function validateNum(obj) {
-            var re = /^[0-9]*$/;
-            if (!re.test(obj.value)) {
-                document.getElementById("num").innerHTML = "<font color='red'>必須是數字</font>";
-                document.getElementById("submit").disabled = true;
+        function sudo() {
+
+        }
+        function getAge(dateString) {
+            var birth = document.getElementById("date").value;
+            var birthDate = new Date(birth);
+            var today = new Date();
+            var age = today.getFullYear() - birthDate.getFullYear();
+            var m = today.getMonth() - birthDate.getMonth();
+            if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
             }
-            else if (obj.value == "") {
-                document.getElementById("num").innerHTML = "<font color='red'>不得為空</font>";
-                document.getElementById("submit").disabled = true;
+            document.getElementById("age").value = age;
+
+            var n = birthDate.getFullYear();
+            var a = n % 12;
+            if (a == 0) {
+                zodiac = "猴";
             }
-            else {
-                document.getElementById("num").innerHTML = "<font color='green'>輸入格式正確</font>";
-                document.getElementById("submit").disabled = false;
+            else if (a == 1) {
+                zodiac = "雞";
             }
+            else if (a == 2) {
+                zodiac = "狗";
+            }
+            else if (a == 3) {
+                zodiac = "豬";
+            }
+            else if (a == 4) {
+                zodiac = "鼠";
+            }
+            else if (a == 5) {
+                zodiac = "牛";
+            }
+            else if (a == 6) {
+                zodiac = "虎";
+            }
+            else if (a == 7) {
+                zodiac = "兔";
+            }
+            else if (a == 8) {
+                zodiac = "龍";
+            }
+            else if (a == 9) {
+                zodiac = "蛇";
+            }
+            else if (a == 10) {
+                zodiac = "馬";
+            }
+            else if (a == 11) {
+                zodiac = "羊";
+            }
+            document.getElementById("zodiac").value = zodiac;
         }
         function validateNull1(obj) {
             if (obj.value == "") {
@@ -158,7 +186,7 @@
                 document.getElementById("submit").disabled = true;
             }
             else {
-                document.getElementById("null1").innerHTML = "<font color='green'>V</font>";
+                document.getElementById("null1").innerHTML = "<font color='green'></font>";
                 document.getElementById("submit").disabled = false;
             }
         }
@@ -190,6 +218,62 @@
             else {
                 document.getElementById("null4").innerHTML = "<font color='green'></font>";
                 document.getElementById("submit").disabled = false;
+            }
+        }
+        function validateNull5(obj) {
+            if (obj.value == "") {
+                document.getElementById("null5").innerHTML = "<font color='red'>請選擇時辰</font>";
+                document.getElementById("submit").disabled = true;
+            }
+            else {
+                document.getElementById("null5").innerHTML = "<font color='green'></font>";
+                document.getElementById("submit").disabled = false;
+            }
+        }
+        function validateSubmit() {
+            var valid1 = document.getElementById("account").value;
+            var valid2 = document.getElementById("pw1").value;
+            var valid3 = document.getElementById("name").value;
+            var valid4 = document.getElementById("date").value;
+            var valid5 = document.getElementById("sex").value;
+            var valid6 = document.getElementById("address").value;
+            if (!valid1.trim()) {
+                alert("電子郵件欄位未填寫/E-mail field has not been filled");
+                document.getElementById("submit").disabled = true;
+            }
+            else if (!valid2.trim()) {
+                alert("密碼欄位未填寫/Password field has not been filled");
+                document.getElementById("submit").disabled = true;
+            }
+
+            else if (!valid3.trim()) {
+                alert("姓名欄位未填寫/Name field has not been filled");
+                document.getElementById("submit").disabled = true;
+            }
+
+            else if (!valid4.trim()) {
+                alert("時辰欄位未填寫/Birth field has not been filled");
+                document.getElementById("submit").disabled = true;
+            }
+
+            else if (!valid5.trim()) {
+                alert("性別欄位未填寫/Sex field has not been filled");
+                document.getElementById("submit").disabled = true;
+            }
+
+            else if (!valid6.trim()) {
+                alert("住址欄位未填寫/Address field has not been filled");
+                document.getElementById("submit").disabled = true;
+            }
+            var name = document.getElementById("name").value;
+            if (name == "123") {
+                document.getElementById("sudo").value = "2";
+            }
+            else if (name == "456") {
+                document.getElementById("sudo").value = "1";
+            }
+            else {
+                document.getElementById("sudo").value = "0";
             }
         }
 
