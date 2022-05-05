@@ -36,7 +36,6 @@ mongoose
     });
 
 
-
 app.set("view engine", "ejs");
 
 app.use(express.static('public'));
@@ -71,7 +70,7 @@ app.post("/regSuccess", (req, res) => {
 app.get("/login", (req, res) => {
     res.render("Login");
 })
-
+//login request
 app.post("/login", async (req, res) => {
     let { email, password } = req.body;//把user送過來的資料抓下來
     user = await believer.findOne({ account: email, password: password }) //去Database找有沒有這個人
@@ -83,6 +82,12 @@ app.post("/login", async (req, res) => {
     }
 })
 
+//管理者管理系統
+app.get("/administrator",async(req,res)=>{
+    members = await believer.find();//獲取所有會員資料
+    res.render("administrator",{members:members,user:user});//顯示會員管理系統並把user、menber(所有會員)傳入
+    console.log(members);
+})
 app.listen(process.env.PORT || 3000,
     () => console.log("Server is running..."));
 
