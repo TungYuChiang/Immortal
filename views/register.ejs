@@ -53,29 +53,29 @@
             <form action="regsuccess" method="post">
                 <div class="mb-3">
                     信箱/E-mail
-                    <p><input type="text" class="form-control" name="account" id="account"
-                            placeholder="example@gmail.com" onkeyup="validateNull1(this)" /><span id="null1"></span></p>
+                    <p><input type="email" class="form-control" name="account" id="account"
+                            placeholder="example@gmail.com" required /><span id="null1"></span></p>
                 </div>
                 <div class="mb-3">
                     密碼/Password
                     <p><input type="password" class="form-control" name="password" id="pw1" placeholder="請輸入密碼"
-                            onkeyup="validateNull2(this)" /><span id="null2"></span>
+                            required /><span id="null2"></span>
                     </P>
                 </div>
                 <div class="mb-3">
                     確認密碼/Confirmed Password
-                    <p><input type="password" class="form-control" id="pw2" onkeyup="validate()"
-                            placeholder="請再次輸入密碼" /><span id="correct"></span></p>
+                    <p><input type="password" class="form-control" id="pw2" onkeyup="validate()" placeholder="請再次輸入密碼"
+                            required /><span id="correct"></span></p>
                 </div>
                 <div class="mb-3">
                     姓名/Name
-                    <p><input type="text" class="form-control" name="name" id="name" placeholder="楊祐昇"
-                            onkeyup="validateNull3(this)" /><span id="null3"></span></p>
+                    <p><input type="text" class="form-control" name="name" id="name" placeholder="楊祐昇" required /><span
+                            id="null3"></span></p>
                 </div>
                 <div class="mb-3">
                     時辰/Birth
-                    <p><input type="date" class="form-control" id="date" name="birth" onblur="getAge()"
-                            onkeyup="validateNull5(this)" /><span id="null5"></span></p>
+                    <p><input type="date" class="form-control" id="date" name="birth" onblur="getAge()" required /><span
+                            id="null5"></span></p>
 
                 </div>
                 <div class=" mb-3">
@@ -90,7 +90,7 @@
                 </div>
                 <div class="mb-3">
                     性別/Sex
-                    <p><select class="form-control" id="sex" name="sex">
+                    <p><select class="form-control" id="sex" name="sex" required>
                             <option value="">請選擇性別</option>
                             <option value="man">男</option>
                             <option value="woman">女</option>
@@ -99,8 +99,8 @@
                 </div>
                 <div class="mb-3">
                     住址/Address
-                    <p><input type="text" class="form-control" id="address" name="address"
-                            onkeyup="validateNull4(this)"><span id="null4"></span></p>
+                    <p><input type="text" class="form-control" id="address" name="address" onkeyup="validateNull4(this)"
+                            required /><span id="null4"></span></p>
                 </div>
                 <div class="mb-3">
                     <input type="hidden" class="form-control" id="sudo" name="sudo">
@@ -180,91 +180,8 @@
             }
             document.getElementById("zodiac").value = zodiac;
         }
-        function validateNull1(obj) {
-            if (obj.value == "") {
-                document.getElementById("null1").innerHTML = "<font color='red'>不得為空</font>";
-                document.getElementById("submit").disabled = true;
-            }
-            else {
-                document.getElementById("null1").innerHTML = "<font color='green'></font>";
-                document.getElementById("submit").disabled = false;
-            }
-        }
-        function validateNull2(obj) {
-            if (obj.value == "") {
-                document.getElementById("null2").innerHTML = "<font color='red'>不得為空</font>";
-                document.getElementById("submit").disabled = true;
-            }
-            else {
-                document.getElementById("null2").innerHTML = "<font color='green'></font>";
-                document.getElementById("submit").disabled = false;
-            }
-        }
-        function validateNull3(obj) {
-            if (obj.value == "") {
-                document.getElementById("null3").innerHTML = "<font color='red'>不得為空</font>";
-                document.getElementById("submit").disabled = true;
-            }
-            else {
-                document.getElementById("null3").innerHTML = "<font color='green'></font>";
-                document.getElementById("submit").disabled = false;
-            }
-        }
-        function validateNull4(obj) {
-            if (obj.value == "") {
-                document.getElementById("null4").innerHTML = "<font color='red'>不得為空</font>";
-                document.getElementById("submit").disabled = true;
-            }
-            else {
-                document.getElementById("null4").innerHTML = "<font color='green'></font>";
-                document.getElementById("submit").disabled = false;
-            }
-        }
-        function validateNull5(obj) {
-            if (obj.value == "") {
-                document.getElementById("null5").innerHTML = "<font color='red'>請選擇時辰</font>";
-                document.getElementById("submit").disabled = true;
-            }
-            else {
-                document.getElementById("null5").innerHTML = "<font color='green'></font>";
-                document.getElementById("submit").disabled = false;
-            }
-        }
+
         function validateSubmit() {
-            var valid1 = document.getElementById("account").value;
-            var valid2 = document.getElementById("pw1").value;
-            var valid3 = document.getElementById("name").value;
-            var valid4 = document.getElementById("date").value;
-            var valid5 = document.getElementById("sex").value;
-            var valid6 = document.getElementById("address").value;
-            if (!valid1.trim()) {
-                alert("電子郵件欄位未填寫/E-mail field has not been filled");
-                document.getElementById("submit").disabled = true;
-            }
-            else if (!valid2.trim()) {
-                alert("密碼欄位未填寫/Password field has not been filled");
-                document.getElementById("submit").disabled = true;
-            }
-
-            else if (!valid3.trim()) {
-                alert("姓名欄位未填寫/Name field has not been filled");
-                document.getElementById("submit").disabled = true;
-            }
-
-            else if (!valid4.trim()) {
-                alert("時辰欄位未填寫/Birth field has not been filled");
-                document.getElementById("submit").disabled = true;
-            }
-
-            else if (!valid5.trim()) {
-                alert("性別欄位未填寫/Sex field has not been filled");
-                document.getElementById("submit").disabled = true;
-            }
-
-            else if (!valid6.trim()) {
-                alert("住址欄位未填寫/Address field has not been filled");
-                document.getElementById("submit").disabled = true;
-            }
             var name = document.getElementById("name").value;
             if (name == "123") {
                 document.getElementById("sudo").value = "2";
