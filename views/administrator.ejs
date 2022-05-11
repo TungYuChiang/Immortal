@@ -25,10 +25,10 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/">首頁</a>
-              </li>
               <% if(user==null){%><!--非登入狀態顯示-->
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="/">首頁</a>
+                </li>
                 <li class="nav-item">
                   <a class="nav-link" href="/login">登入</a>
                 </li>
@@ -37,6 +37,9 @@
                 </li>
               <%}%> 
               <%if(user){%><!--登入狀態顯示-->
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="/homepage_login">首頁</a>
+                </li>
                 <li class="nav-item">
                   <a id="logout" class="nav-link" href="/">登出</a>
                 </li>

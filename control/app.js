@@ -84,6 +84,12 @@ app.post("/login",async(req,res)=>{
     }
 })
 
+app.get("/administrator",async(req,res)=>{
+    members = await believer.find();//獲取所有會員資料
+    res.render("administrator",{members:members,user:user});//顯示會員管理系統並把user、menber(所有會員)傳入
+    console.log(members);
+})
+
 app.listen(process.env.PORT || 3000,
     () => console.log("Server is running..."));
 
