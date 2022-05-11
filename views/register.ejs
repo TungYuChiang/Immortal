@@ -28,11 +28,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-<<<<<<< HEAD
-                <ul class="navbar-nav">  
-=======
                 <ul class="navbar-nav">
->>>>>>> react
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/">首頁</a>
                     </li>
@@ -78,28 +74,6 @@
                 </div>
                 <div class="mb-3">
                     時辰/Birth
-<<<<<<< HEAD
-                    <p><input type="date" class="form-control" id="date" name="date"></p>
-
-                </div>
-                <div class="mb-3">
-                    生肖/Zodiac
-                    <p><select class="form-control" id="zodiac" name="zodiac">
-                            <option value="">請選擇十二生肖</option>
-                            <option value="rat">鼠</option>
-                            <option value="ox">牛</option>
-                            <option value="tiger">虎</option>
-                            <option value="rabbit">兔</option>
-                            <option value="dragon">龍</option>
-                            <option value="snake">蛇</option>
-                            <option value="horse">馬</option>
-                            <option value="goat">羊</option>
-                            <option value="monkey">猴</option>
-                            <option value="rooster">雞</option>
-                            <option value="dog">狗</option>
-                            <option value="pig">豬</option>
-                        </select></p>
-=======
                     <p><input type="date" class="form-control" id="date" name="birth" onblur="getAge()"
                             onkeyup="validateNull5(this)" /><span id="null5"></span></p>
 
@@ -107,18 +81,12 @@
                 <div class=" mb-3">
                     生肖/Zodiac
                     <p><input type="text" class="form-control" id="zodiac" name="zodiac" readonly="readonly" />
->>>>>>> react
 
                 </div>
                 <div class="mb-3">
                     年齡/Age
-<<<<<<< HEAD
-                    <p><input type="text" class="form-control" name="age" onkeyup="validateNum(this)"><span
-                            id="num"></span></p>
-=======
                     <p><input type="text" class="form-control" id="age" name="age" readonly="readonly" />
                     </p>
->>>>>>> react
                 </div>
                 <div class="mb-3">
                     性別/Sex
@@ -128,10 +96,6 @@
                             <option value="woman">女</option>
                             <option value="other">其他</option>
                         </select></p>
-<<<<<<< HEAD
-
-=======
->>>>>>> react
                 </div>
                 <div class="mb-3">
                     住址/Address
@@ -139,14 +103,10 @@
                             onkeyup="validateNull4(this)"><span id="null4"></span></p>
                 </div>
                 <div class="mb-3">
-<<<<<<< HEAD
-                    <p><input type="submit" value="註冊" id="submit" />
-=======
                     <input type="hidden" class="form-control" id="sudo" name="sudo">
                 </div>
                 <div class="mb-3">
                     <p><input type="submit" value="註冊" id="submit" onclick="validateSubmit()" />
->>>>>>> react
                         <input type="reset" value="重置" />
                     </p>
                 </div>
@@ -166,22 +126,6 @@
                 document.getElementById("submit").disabled = true;
             }
         }
-<<<<<<< HEAD
-        function validateNum(obj) {
-            var re = /^[0-9]*$/;
-            if (!re.test(obj.value)) {
-                document.getElementById("num").innerHTML = "<font color='red'>必須是數字</font>";
-                document.getElementById("submit").disabled = true;
-            }
-            else if (obj.value == "") {
-                document.getElementById("num").innerHTML = "<font color='red'>不得為空</font>";
-                document.getElementById("submit").disabled = true;
-            }
-            else {
-                document.getElementById("num").innerHTML = "<font color='green'>輸入格式正確</font>";
-                document.getElementById("submit").disabled = false;
-            }
-=======
         function sudo() {
 
         }
@@ -235,7 +179,6 @@
                 zodiac = "羊";
             }
             document.getElementById("zodiac").value = zodiac;
->>>>>>> react
         }
         function validateNull1(obj) {
             if (obj.value == "") {
@@ -243,11 +186,7 @@
                 document.getElementById("submit").disabled = true;
             }
             else {
-<<<<<<< HEAD
-                document.getElementById("null1").innerHTML = "<font color='green'>V</font>";
-=======
                 document.getElementById("null1").innerHTML = "<font color='green'></font>";
->>>>>>> react
                 document.getElementById("submit").disabled = false;
             }
         }
@@ -281,8 +220,6 @@
                 document.getElementById("submit").disabled = false;
             }
         }
-<<<<<<< HEAD
-=======
         function validateNull5(obj) {
             if (obj.value == "") {
                 document.getElementById("null5").innerHTML = "<font color='red'>請選擇時辰</font>";
@@ -339,7 +276,6 @@
                 document.getElementById("sudo").value = "0";
             }
         }
->>>>>>> react
 
     </script>
 </body>
