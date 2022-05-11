@@ -43,6 +43,9 @@ app.use(express.static('public'));
 app.get("/",(req,res)=>{
     res.render("index",{user:null});
 })
+app.get("/homepage_login",(req,res)=>{
+    res.render("index",{user:user});
+})
 
 //register
 app.get("/register", (req, res) => {
