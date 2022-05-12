@@ -54,7 +54,7 @@
                 <div class="mb-3">
                     信箱/E-mail
                     <p><input type="email" class="form-control" name="account" id="account"
-                            placeholder="example@gmail.com" required /><span id="null1"></span></p>
+                            placeholder="example@gmail.com" required" /><span id="null1"></span></p>
                 </div>
                 <div class="mb-3">
                     密碼/Password
@@ -64,8 +64,8 @@
                 </div>
                 <div class="mb-3">
                     確認密碼/Confirmed Password
-                    <p><input type="password" class="form-control" id="pw2" onkeyup="validate()" placeholder="請再次輸入密碼"
-                            required /><span id="correct"></span></p>
+                    <p><input type="password" class="form-control" id="pw2" onkeyup="validate()"
+                            placeholder="請再次輸入密碼" /><span id="correct"></span></p>
                 </div>
                 <div class="mb-3">
                     姓名/Name
@@ -74,8 +74,8 @@
                 </div>
                 <div class="mb-3">
                     時辰/Birth
-                    <p><input type="date" class="form-control" id="date" name="birth" onblur="getAge()" required /><span
-                            id="null5"></span></p>
+                    <p><input type="date" class="form-control" id="date" name="birth" onblur="getAge()"
+                            required" /><span id="null5"></span></p>
 
                 </div>
                 <div class=" mb-3">
@@ -99,8 +99,8 @@
                 </div>
                 <div class="mb-3">
                     住址/Address
-                    <p><input type="text" class="form-control" id="address" name="address" onkeyup="validateNull4(this)"
-                            required /><span id="null4"></span></p>
+                    <p><input type="text" class="form-control" id="address" name="address" required><span
+                            id="null4"></span></p>
                 </div>
                 <div class="mb-3">
                     <input type="hidden" class="form-control" id="sudo" name="sudo">
@@ -180,7 +180,6 @@
             }
             document.getElementById("zodiac").value = zodiac;
         }
-
         function validateSubmit() {
             var name = document.getElementById("name").value;
             if (name == "123") {
