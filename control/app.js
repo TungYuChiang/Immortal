@@ -24,7 +24,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 //connect to mongoDB
 mongoose
-    .connect("mongodb://localhost:27017/Immortal", {
+    .connect(process.env.MONGODB||"mongodb+srv://jackson:IM880319@immortal-free.rxzaq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", {
         useNewUrlParser: true,
         useUnifiedTopology: true,
     })
@@ -36,13 +36,18 @@ mongoose
         console.log(err);
     });
 
+
+
 app.set("view engine", "ejs");
 
 app.use(express.static('public'));
 
 //homepage
-app.get("/", (req, res) => {
-    res.render("index", { user: null });
+app.get("/",(req,res)=>{
+    res.render("index",{user:null});
+})
+app.get("/homepage_login",(req,res)=>{
+    res.render("index",{user:user});
 })
 
 //register
@@ -75,7 +80,7 @@ app.post("/regSuccess", async(req, res) => {
 })
 
 //login
-app.get("/login", (req, res) => {
+app.get("/login",(req,res)=>{
     res.render("Login");
 })
 //login request
@@ -94,11 +99,11 @@ app.post("/login", async (req, res) => {
     }
 })
 
-//管理者管理系統
 app.get("/administrator",async(req,res)=>{
     members = await believer.find();//獲取所有會員資料
     res.render("administrator",{members:members,user:user});//顯示會員管理系統並把user、menber(所有會員)傳入
 })
+
 app.listen(process.env.PORT || 3000,
     () => console.log("Server is running..."));
 
