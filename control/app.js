@@ -24,7 +24,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 //connect to mongoDB
 mongoose
-    .connect(process.env.MONGODB||"mongodb+srv://jackson:IM880319@immortal-free.rxzaq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", {
+    .connect("mongodb://localhost:27017/Immortal", {
         useNewUrlParser: true,
         useUnifiedTopology: true,
     })
