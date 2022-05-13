@@ -36,8 +36,6 @@ mongoose
         console.log(err);
     });
 
-
-
 app.set("view engine", "ejs");
 
 app.use(express.static('public'));
@@ -55,14 +53,14 @@ app.get("/register", (req, res) => {
     res.render("register");
 });
 
-app.post("/regSuccess", async(req, res) => {
+app.post("/regSuccess", async (req, res) => {
     let { account, password, name, birth, zodiac, age, sex, address, offend, sudo } = req.body;
     //將抓過來的檔案及合成一個data
-    try{
+    try {
         //把密碼加密
-        const hash = await bcrypt.hash(password,10);//參數10代表密碼學中的salt，意思是要在加密的字串中加特定的字符，數字越大salt次數越多越安全相對的時間越長
+        const hash = await bcrypt.hash(password, 10);//參數10代表密碼學中的salt，意思是要在加密的字串中加特定的字符，數字越大salt次數越多越安全相對的時間越長
         req.body.password = hash;
-    }catch(e){
+    } catch (e) {
         console.log(e);
         res.status(400).send("Something is broken");
     }
@@ -86,12 +84,12 @@ app.get("/login",(req,res)=>{
 //login request
 app.post("/login", async (req, res) => {
     let { email, password } = req.body;//把user送過來的資料抓下來
-    user = await believer.findOne({ account: email}) //去Database找有沒有這個人
+    user = await believer.findOne({ account: email }) //去Database找有沒有這個人
     if (user) {
-        const isMatch = await bcrypt.compare(password,user.password)//檢查加密後的密碼有沒有一樣，會回傳True或False
-        if (isMatch==true){
+        const isMatch = await bcrypt.compare(password, user.password)//檢查加密後的密碼有沒有一樣，會回傳True或False
+        if (isMatch == true) {
             res.status(200).render("index", { user: user });//登入成功導回首頁
-        }else{
+        } else {
             res.status(400).send("帳號或密碼錯誤");
         }
     } else {
@@ -99,11 +97,12 @@ app.post("/login", async (req, res) => {
     }
 })
 
-app.get("/administrator",async(req,res)=>{
+//管理者管理系統
+app.get("/administrator", async (req, res) => {
     members = await believer.find();//獲取所有會員資料
-    res.render("administrator",{members:members,user:user});//顯示會員管理系統並把user、menber(所有會員)傳入
-})
+    res.render("administrator", { members: members, user: user });//顯示會員管理系統並把user、menber(所有會員)傳入
 
+})
 app.listen(process.env.PORT || 3000,
     () => console.log("Server is running..."));
 
