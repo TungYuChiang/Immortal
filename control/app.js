@@ -103,6 +103,14 @@ app.get("/administrator", async (req, res) => {
     res.render("administrator", { members: members, user: user });//顯示會員管理系統並把user、menber(所有會員)傳入
 
 })
+
+//列印光明燈
+app.post("/printer", async (req, res) => {
+    res.render("test2.html")
+})
+
+
+
 app.listen(process.env.PORT || 3000,
     () => console.log("Server is running..."));
 

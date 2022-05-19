@@ -28,11 +28,11 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/">首頁</a>
-          </li>
           <% if(user==null){%>
             <!--非登入狀態顯示-->
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/">首頁</a>
+            </li>
             <li class="nav-item">
               <a class="nav-link" href="/login">登入</a>
             </li>
@@ -42,6 +42,9 @@
             <%}%>
               <%if(user){%>
                 <!--登入狀態顯示-->
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="/homepage_login">首頁</a>
+                </li>
                 <li class="nav-item">
                   <a id="logout" class="nav-link" href="/">登出</a>
                 </li>
@@ -92,14 +95,26 @@
               <%=m.address%>
             </td>
             <td class="introducer">無</td>
-            <td class="lightup"><input type="checkbox"></td>
+            <td class="lightup" ><input type="checkbox" name="godLight"></td>
           </tr>
           <%})%>
       </tbody>
     </table>
   </div>
-  <button type="button"
-    onclick="printJS({ printable: 'immortal-dev/photos/pexels-pixabay-460376.jpg', type: 'images', header: 'hello world'})">列印</button>
+  <button type="button" id="btn">列印</button>
 </body>
+<script>
+    const btn = document.querySelector('#btn');
+    btn.addEventListener('click', (event) => {
+        let checkboxes = document.querySelectorAll('input[name="godLight"]:checked');
+        let values = [];
+        checkboxes.forEach((checkbox) => {
+            values.push(checkbox.parentElement.parentElement.childNodes[1].innerText)
+        });
+        console.log(values)
+    });    
+    
+    
+</script>
 
 </html>
