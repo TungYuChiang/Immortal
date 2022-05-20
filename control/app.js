@@ -84,6 +84,7 @@ app.get("/login",(req,res)=>{
 //login request
 app.post("/login", async (req, res) => {
     let { email, password } = req.body;//把user送過來的資料抓下來
+    console.log(req.body)
     user = await believer.findOne({ account: email }) //去Database找有沒有這個人
     if (user) {
         const isMatch = await bcrypt.compare(password, user.password)//檢查加密後的密碼有沒有一樣，會回傳True或False
@@ -106,8 +107,16 @@ app.get("/administrator", async (req, res) => {
 
 //列印光明燈
 app.post("/printer", async (req, res) => {
-    res.render("test2.html")
+    console.log("接收到post方法")
+    console.log(req.body.values)
+    res.render("printer", {values: req.body.values});
 })
+app.get("/printer", async (req, res) => {
+    console.log("接收到post方法")
+    console.log(req.body.values)
+    res.render("printer");
+})
+
 
 
 
