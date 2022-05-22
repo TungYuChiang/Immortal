@@ -112,9 +112,9 @@ app.post("/printer", async (req, res) => {
     res.render("printer", {values: req.body.values});
 })
 app.get("/printer", async (req, res) => {
-    console.log("接收到post方法")
+    console.log("接收到get方法")
     console.log(req.body.values)
-    res.render("printer");
+    res.render("printer",{values: req.body.values});
 })
 
 

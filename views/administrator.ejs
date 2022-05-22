@@ -113,15 +113,23 @@
             values.push(checkbox.parentElement.parentElement.childNodes[1].innerText)
         });
         console.log(values)
+        var result=""
         var xhr=new XMLHttpRequest();
         $.ajax({
             type: 'POST',
             url: '/printer',
             data:{values} ,
-            success: function(msg) {
-              alert('Data Saved: ' + msg);
+            success:function(msg){
+                  result=msg;
+                  document.write(msg)
+                  
             }
         });
+        console.log(result.length+"執行到127")
+        if(result.length>0){
+            console.log("執行window.open")
+            window.open(result);
+          }
     });
 
     
