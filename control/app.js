@@ -2,7 +2,8 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
+const { render } = require("express/lib/response");
 //define a schema
 const Schema = new mongoose.Schema({
     account: String,
@@ -44,6 +45,9 @@ app.use(express.static('public'));
 app.get("/", (req, res) => {
     res.render("index", { user: null });
 })
+app.get("/homepage_login", (req, res) => {
+    res.render("index", { user: user });
+})
 
 //register
 app.get("/register", (req, res) => {
@@ -81,6 +85,7 @@ app.get("/login", (req, res) => {
 //login request
 app.post("/login", async (req, res) => {
     let { email, password } = req.body;//把user送過來的資料抓下來
+    console.log(req.body)
     user = await believer.findOne({ account: email }) //去Database找有沒有這個人
     if (user) {
         const isMatch = await bcrypt.compare(password, user.password)//檢查加密後的密碼有沒有一樣，會回傳True或False
@@ -92,7 +97,7 @@ app.post("/login", async (req, res) => {
     } else {
         res.status(404).send("請先註冊");
     }
-})
+});
 
 //管理者管理系統
 app.get("/administrator", async (req, res) => {
@@ -100,6 +105,48 @@ app.get("/administrator", async (req, res) => {
     res.render("administrator", { members: members, user: user });//顯示會員管理系統並把user、menber(所有會員)傳入
 
 })
+
+//列印光明燈
+app.post("/printer", async (req, res) => {
+    console.log("接收到post方法")
+    console.log(req.body.values)
+    res.render("printer", { values: req.body.values });
+})
+app.get("/printer", async (req, res) => {
+    console.log("接收到get方法")
+    console.log(req.body.values)
+    res.render("printer", { values: req.body.values });
+})
+
+//edit
+app.get("/edit/:id", async (req, res) => {
+    const id = req.params.id;
+    //console.log(id);
+    believer.findById(id)
+        .then(result => {
+            res.render("edit", { owner: result, user: user });
+        })
+        .catch(err => {
+            console.log(err);
+        });
+})
+
+app.post("/editsuccess/:id", async (req, res) => {
+    try {
+        let { account, name, address } = req.body;
+        const id = req.params.id;
+        const edit = await believer.findByIdAndUpdate(id, req.body);
+        res.render("editsuccess", { user: user });
+    } catch {
+        res.status(404);
+    }
+})
+
+//光明燈
+app.get("/light", async (req, res) => {
+    res.render("light", { user: user });
+})
+
+
 app.listen(process.env.PORT || 3000,
     () => console.log("Server is running..."));
-
