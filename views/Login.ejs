@@ -20,7 +20,7 @@
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Navbar</a>
+      <a class="navbar-brand" href="/">Navbar</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -37,14 +37,15 @@
             <a class="nav-link" href="/register">註冊</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="#">點燈紀錄</a>
+            <a class="nav-link " href="/light">光明燈</a>
           </li>
         </ul>
       </div>
     </div>
   </nav>
   <div style="display: flex;justify-content: center;align-items: center;margin-top: 2rem;height: 700px;">
-    <form class="form border" action = "/login" method = "Post" style="padding: 3rem;align-items: center;justify-content: center;width:50vw;">
+    <form class="form border" action="/login" method="Post"
+      style="padding: 3rem;align-items: center;justify-content: center;width:50vw;">
       <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">信箱/E-Mail</label>
         <input type="email" class="form-control" id="email" placeholder="name@example.com" name="email">
@@ -54,7 +55,7 @@
         <input type="password" class="form-control" id="Password" name="password">
       </div>
       <div class="mb-3">
-        <button id = "login" >登入</button>
+        <button id="login">登入</button>
       </div>
     </form>
   </div>
