@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 //define a schema
 const Schema = new mongoose.Schema({
     account: String,
@@ -41,11 +41,11 @@ app.set("view engine", "ejs");
 app.use(express.static('public'));
 
 //homepage
-app.get("/",(req,res)=>{
-    res.render("index",{user:null});
+app.get("/", (req, res) => {
+    res.render("index", { user: null });
 })
-app.get("/homepage_login",(req,res)=>{
-    res.render("index",{user:user});
+app.get("/homepage_login", (req, res) => {
+    res.render("index", { user: user });
 })
 
 //register
@@ -78,7 +78,7 @@ app.post("/regSuccess", async (req, res) => {
 })
 
 //login
-app.get("/login",(req,res)=>{
+app.get("/login", (req, res) => {
     res.render("Login");
 })
 //login request
@@ -96,7 +96,7 @@ app.post("/login", async (req, res) => {
     } else {
         res.status(404).send("請先註冊");
     }
-})
+});
 
 //管理者管理系統
 app.get("/administrator", async (req, res) => {
@@ -109,17 +109,50 @@ app.get("/administrator", async (req, res) => {
 app.post("/printer", async (req, res) => {
     console.log("接收到post方法")
     console.log(req.body.values)
-    res.render("printer", {values: req.body.values});
+    res.render("printer", { values: req.body.values });
 })
 app.get("/printer", async (req, res) => {
     console.log("接收到get方法")
     console.log(req.body.values)
-    res.render("printer",{values: req.body.values});
+    res.render("printer", { values: req.body.values });
 })
 
+//edit
+app.get("/edit/:id", async (req, res) => {
+    const id = req.params.id;
+    //console.log(id);
+    believer.findById(id)
+        .then(result => {
+            res.render("edit", { owner: result, user: user });
+        })
+        .catch(err => {
+            console.log(err);
+        });
+})
 
+app.post("/editsuccess/:id", async (req, res) => {
+    try {
+        let { account, name, address } = req.body;
+        const id = req.params.id;
+        const edit = await believer.findByIdAndUpdate(id, req.body);
+        res.render("editsuccess", { user: user });
+    } catch {
+        res.status(404);
+    }
+})
+
+//delete
+app.get("/delsuccess/:id", async (req, res) => {
+    const id = req.params.id;
+    await believer.findByIdAndDelete(id);
+    res.render("delsuccess", { user: user });
+})
+
+//光明燈
+app.get("/light", async (req, res) => {
+    res.render("light", { user: user });
+})
 
 
 app.listen(process.env.PORT || 3000,
     () => console.log("Server is running..."));
-
