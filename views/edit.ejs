@@ -45,7 +45,8 @@
                                     <a class="nav-link active" aria-current="page" href="/homepage_login">首頁</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a id="logout" class="nav-link" href="/" onclick="logoutalert()">登出</a>
+                                    <a id="logout" class="nav-link" href="/"
+                                        onclick="if(confirm('你確定要登出嗎?')==false) return false;">登出</a>
                                 </li>
                                 <% } %>
                                     <li class="nav-item">
@@ -71,6 +72,17 @@
                     信箱/E-mail
                     <p><input type="email" class="form-control" name="account" id="account" value="<%=owner.account%>"
                             required /><span id="null1"></span></p>
+                </div>
+                <div class="mb-3">
+                    密碼/Password
+                    <p><input type="password" class="form-control" name="password" id="pw1" value="<%=owner.password%>"
+                            required /><span id="null2"></span>
+                    </P>
+                </div>
+                <div class="mb-3">
+                    確認密碼/Confirmed Password
+                    <p><input type="password" class="form-control" id="pw2" onkeyup="validate()"
+                            value="<%=owner.password%>" /><span id="correct"></span></p>
                 </div>
                 <div class="mb-3">
                     姓名/Name
