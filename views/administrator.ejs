@@ -47,7 +47,7 @@
                   <a class="nav-link active" aria-current="page" href="/homepage_login">首頁</a>
                 </li>
                 <li class="nav-item">
-                  <a id="logout" class="nav-link" href="/">登出</a>
+                  <a id="logout" class="nav-link" href="/" onclick="if(confirm('你確定要登出嗎?')==false) return false;">登出</a>
                 </li>
                 <% } %>
                   <li class="nav-item">
@@ -97,7 +97,7 @@
             </td>
             <td class="introducer">無</td>
             <td class="lightup"><input type="checkbox" name="godLight"></td>
-            <td><a class="edit" href="/edit/<%=m._id%>">修改</a>|<a class="delete" href="/delsuccess/<%=m._id%>">刪除</a>
+            <td><a class="edit" href="/edit/<%=m._id%>">修改</a>|<a class="delete" href="/delete/<%=m._id%>">刪除</a>
             </td>
           </tr>
           <%})%>
