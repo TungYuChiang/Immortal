@@ -81,6 +81,7 @@ app.post("/regSuccess", async (req, res) => {
 app.get("/login", (req, res) => {
     res.render("Login");
 })
+
 //login request
 app.post("/login", async (req, res) => {
     let { email, password } = req.body;//把user送過來的資料抓下來
@@ -129,7 +130,15 @@ app.get("/edit/:id", async (req, res) => {
 
 app.post("/editsuccess/:id", async (req, res) => {
     try {
-        let { account, name, address } = req.body;
+        let { account, password, name, address } = req.body;
+        try {
+            //把密碼加密
+            const hash = await bcrypt.hash(password, 10);//參數10代表密碼學中的salt，意思是要在加密的字串中加特定的字符，數字越大salt次數越多越安全相對的時間越長
+            req.body.password = hash;
+        } catch (e) {
+            console.log(e);
+            res.status(400).send("Something is broken");
+        }
         const id = req.params.id;
         const edit = await believer.findByIdAndUpdate(id, req.body);
         res.render("editsuccess", { user: user });
@@ -139,7 +148,19 @@ app.post("/editsuccess/:id", async (req, res) => {
 })
 
 //delete
-app.get("/delsuccess/:id", async (req, res) => {
+app.get("/delete/:id", async (req, res) => {
+    const id = req.params.id;
+    //console.log(id);
+    believer.findById(id)
+        .then(result => {
+            res.render("delete", { owner: result, user: user });
+        })
+        .catch(err => {
+            console.log(err);
+        });
+})
+
+app.post("/delsuccess/:id", async (req, res) => {
     const id = req.params.id;
     await believer.findByIdAndDelete(id);
     res.render("delsuccess", { user: user });
