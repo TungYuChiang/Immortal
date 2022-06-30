@@ -21,6 +21,7 @@ const believer = mongoose.model("believer", Schema);
 
 //此行為middleware 代表必定會被執行
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static('public'));
 
 //connect to mongoDB
 mongoose
