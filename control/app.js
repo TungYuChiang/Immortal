@@ -37,6 +37,7 @@ mongoose
         console.log(err);
     });
 
+app.set("views","C:/Users/AS/Desktop/Immortal-1/views");    
 app.set("view engine", "ejs");
 
 //homepage
