@@ -39,8 +39,6 @@ mongoose
 
 app.set("view engine", "ejs");
 
-app.use(express.static('public'));
-
 //homepage
 app.get("/", (req, res) => {
     res.render("index", { user: null });
@@ -111,12 +109,9 @@ app.get("/administrator", async (req, res) => {
 app.post("/printer", async (req, res) => {
     console.log("接收到post方法")
     console.log(req.body.values)
-    res.render("printer", { values: req.body.values });
-})
-app.get("/printer", async (req, res) => {
-    console.log("接收到get方法")
-    console.log(req.body.values)
-    res.render("printer", { values: req.body.values });
+    let printer =await believer.find({name:{$in:req.body.values}});
+    console.log(printer);
+    res.render("printer", { values: printer });
 })
 
 //edit
