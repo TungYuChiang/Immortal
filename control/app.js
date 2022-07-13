@@ -8,19 +8,22 @@ const Schema = new mongoose.Schema({
     account: String,
     password: String,
     name: String,
-    birth: Date,
+    birth: String,
     zodiac: String,
     age: Number,
     sex: String,
     address: String,
+    state: String,
     offend: Boolean,
     sudo: String,
+    record: Array,
 });
 //create a model for 信眾(believers)
 const believer = mongoose.model("believer", Schema);
 
 //此行為middleware 代表必定會被執行
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static('public'));
 
 //connect to mongoDB
 mongoose
@@ -133,7 +136,8 @@ app.get("/edit/:id", async (req, res) => {
 
 app.post("/editsuccess/:id", async (req, res) => {
     try {
-        let { account, password, name, address } = req.body;
+        let { account, password, name, address, state, record } = req.body;
+        year = new Date().getFullYear();
         try {
             //把密碼加密
             const hash = await bcrypt.hash(password, 10);//參數10代表密碼學中的salt，意思是要在加密的字串中加特定的字符，數字越大salt次數越多越安全相對的時間越長
@@ -143,7 +147,10 @@ app.post("/editsuccess/:id", async (req, res) => {
             res.status(400).send("Something is broken");
         }
         const id = req.params.id;
-        const edit = await believer.findByIdAndUpdate(id, req.body);
+        if (state == "已繳費") {
+            await believer.findByIdAndUpdate(id, { $addToSet: { "record": year } });
+        }
+        await believer.findByIdAndUpdate(id, req.body);
         res.render("editsuccess", { user: user });
     } catch {
         res.status(404);
