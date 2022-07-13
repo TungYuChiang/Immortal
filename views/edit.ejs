@@ -95,9 +95,26 @@
                             required><span id="null4"></span></p>
                 </div>
                 <div class="mb-3">
+                    點燈狀態/state
+                    <p>
+                        <select class="form-control" id="state" name="state">
+                            <option>
+                                <%=owner.state%>
+                            </option>
+                            <option>已繳費</option>
+                            <option>已申請未繳費</option>
+                            <option>未申請</option>
+                        </select>
+                    </p>
+
+                </div>
+                <div class="mb-3">
                     <p>
                         <a href="/editsuccess/<%=owner._id%>">
-                            <input type="submit" value="修改">
+                            <input type="submit" value="修改" onclick="addrecord()">
+                        </a>
+                        <a href="/administrator">
+                            <input type="button" value="返回">
                         </a>
                     </p>
                 </div>
@@ -118,8 +135,9 @@
                 document.getElementById("submit").disabled = true;
             }
         }
-        function logoutalert() {
-            alert('即將登出！')
+        function addrecord() {
+            var state = document.getElementById("state").value;
+            console.log(state);
         }
     </script>
 </body>
