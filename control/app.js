@@ -174,7 +174,8 @@ app.post("/delsuccess/:id", async (req, res) => {
 
 //光明燈
 app.get("/light", async (req, res) => {
-    res.render("light", { user: user });
+    let date = new Date;
+    res.render("light", { user: user,date:date });
 })
 
 

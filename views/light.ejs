@@ -65,7 +65,31 @@
             </div>
         </div>
     </nav>
-    <h1>光明燈</h1>
+    <div style="display:flex;flex-direction: column;justify-content: center;align-items: center;">
+        <% if(!user.record.find((year)=>year== date.getFullYear()) && user.state == "無"){ %> 
+            <div style="display:flex;flex-direction: column;justify-content: center;align-items: center;">
+                <h1>您今年尚未申請光明燈</h1>
+                <button>立即申請</button>
+            </div>
+        <% } %>
+        <% if(user.state == "applying"){ %> 
+            <div style="display:flex;flex-direction: column;justify-content: center;align-items: center;">
+                <h1>光明燈已申請，正在處理中...</h1>
+            </div>
+        <% } %>
+        <div class="text"style="display:flex;flex-direction: column;justify-content: center;align-items: center;">
+            <h1>申請紀錄</h1>
+        </div>
+        <div style="display:flex;align-items: center;flex-wrap: wrap;padding-left: 3rem;">
+            <% user.record.map((d)=>{ %>
+                <div class="card"style="border-color:orange;border-width:1rem;margin:1rem;display:flex;flex-direction: column;justify-content: center;align-items: center;padding: 1rem;">
+                    <img src="https://www.longshansi.org.tw/upload_files/web/uploadfile/2022020913/original/220209130837886152.svg" alt="光明燈照片" style="width: 250px; height: 250px;">
+                    <div style="background-color: black;width: 80%;margin-bottom: 1rem;border-radius: 2rem;"><p style="text-align: center;color: white;margin: 8px;"><%= user.name %> </p></div>
+                    <div style="background-color: black;width: 80%;border-radius: 2rem;"><p style="text-align: center;color: white;margin: 8px;"><%= d %> </p></div>
+                </div> 
+                <%})%>
+        </div> 
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
