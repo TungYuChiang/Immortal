@@ -3,6 +3,7 @@ const app = express();
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const bcrypt = require("bcryptjs");
+const axios = require("axios");
 //define a schema
 const Schema = new mongoose.Schema({
     account: String,
@@ -175,7 +176,19 @@ app.post("/delsuccess/:id", async (req, res) => {
 //光明燈
 app.get("/light", async (req, res) => {
     let date = new Date;
-    res.render("light", { user: user,date:date });
+    res.render("light", { user: user,date:date,axios:axios });
+})
+
+//申請光明燈API(change state)
+app.post("/light/apply",async(req,res)=>{
+    let {user} = req.body;
+    let applyer = await  believer.findOneAndUpdate({name:user},{state:"已申請未繳費"});
+    if(applyer){
+        res.send("已成功申請");
+    }else{
+        res.send({mes:"發生錯誤請稍後再試"});
+    }
+
 })
 
 
