@@ -66,13 +66,14 @@
         </div>
     </nav>
     <div style="display:flex;flex-direction: column;justify-content: center;align-items: center;">
-        <% if(!user.record.find((year)=>year== date.getFullYear()) && user.state == "無"){ %> 
+        <h2 id="name"><%=user.name%></h2>
+        <% if(!user.record.find((year)=>year== date.getFullYear()) && user.state == "未申請"){ %> 
             <div style="display:flex;flex-direction: column;justify-content: center;align-items: center;">
                 <h1>您今年尚未申請光明燈</h1>
-                <button>立即申請</button>
+                <button id="apply">立即申請</button>
             </div>
         <% } %>
-        <% if(user.state == "applying"){ %> 
+        <% if(user.state == "已申請未繳費"){ %> 
             <div style="display:flex;flex-direction: column;justify-content: center;align-items: center;">
                 <h1>光明燈已申請，正在處理中...</h1>
             </div>
@@ -93,7 +94,22 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.js"
+integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="crossorigin="anonymous"></script>
     <script>
+        const apply =document.getElementById("apply");
+        apply.addEventListener("click",()=>{
+        const user =document.getElementById("name").innerText
+        $.ajax({
+        type: 'POST',
+        url: '/light/apply',
+        data: {user},
+        success: function (response) {
+            console.log(response);
+            alert(response);
+        }
+        });
+        })
         const logout = document.getElementById("logout");
         //登出
         logout.addEventListener("click", () => {
